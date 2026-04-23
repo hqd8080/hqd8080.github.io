@@ -837,6 +837,13 @@
   </url>
   
   <url>
+    <loc>https://hqd8080.github.io/tags/Golang/</loc>
+    <lastmod>2026-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hqd8080.github.io/tags/Go/</loc>
     <lastmod>2026-04-23</lastmod>
     <changefreq>daily</changefreq>
@@ -844,7 +851,28 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/tags/Golang/</loc>
+    <loc>https://hqd8080.github.io/tags/go-zero/</loc>
+    <lastmod>2026-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/tags/Redis/</loc>
+    <lastmod>2026-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/tags/WebSocket/</loc>
+    <lastmod>2026-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/tags/gorm/</loc>
     <lastmod>2026-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -859,34 +887,6 @@
   
   <url>
     <loc>https://hqd8080.github.io/tags/redis/</loc>
-    <lastmod>2026-04-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/tags/Redis/</loc>
-    <lastmod>2026-04-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/tags/gorm/</loc>
-    <lastmod>2026-04-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/tags/WebSocket/</loc>
-    <lastmod>2026-04-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/tags/go-zero/</loc>
     <lastmod>2026-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1000,7 +1000,7 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/categories/Docker/</loc>
+    <loc>https://hqd8080.github.io/categories/goZero/</loc>
     <lastmod>2026-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1014,7 +1014,7 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/categories/goZero/</loc>
+    <loc>https://hqd8080.github.io/categories/Docker/</loc>
     <lastmod>2026-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
