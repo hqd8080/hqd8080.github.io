@@ -220,6 +220,8 @@
         <ul>
           <li><a href="/tags">All</a></li>
           
+          <li><a href="/tags/Git/">Git</a></li>
+          
           <li><a href="/tags/MySQL/">MySQL</a></li>
           
           <li><a href="/tags/区块链/">区块链</a></li>
@@ -236,8 +238,6 @@
           
           <li><a href="/tags/redis/">redis</a></li>
           
-          <li><a href="/tags/Git/">Git</a></li>
-          
           <li><a href="/tags/Go/">Go</a></li>
           
           <li><a href="/tags/Golang/">Golang</a></li>
@@ -247,12 +247,6 @@
           <li><a href="/tags/kafka/">kafka</a></li>
           
           <li><a href="/tags/gRPC/">gRPC</a></li>
-          
-          <li><a href="/tags/Redis/">Redis</a></li>
-          
-          <li><a href="/tags/WebSocket/">WebSocket</a></li>
-          
-          <li><a href="/tags/gorm/">gorm</a></li>
           
           <li><a href="/tags/kubernetes/">kubernetes</a></li>
           
@@ -264,11 +258,17 @@
           
           <li><a href="/tags/linux/">linux</a></li>
           
+          <li><a href="/tags/Nginx/">Nginx</a></li>
+          
           <li><a href="/tags/微服务/">微服务</a></li>
           
           <li><a href="/tags/microservice/">microservice</a></li>
           
-          <li><a href="/tags/Nginx/">Nginx</a></li>
+          <li><a href="/tags/Redis/">Redis</a></li>
+          
+          <li><a href="/tags/WebSocket/">WebSocket</a></li>
+          
+          <li><a href="/tags/gorm/">gorm</a></li>
           
           <li><a href="/tags/Java/">Java</a></li>
           
@@ -300,185 +300,6 @@
       <a href="/tags/Golang/" class="label label-default mb">Golang</a>
      
       <a href="/tags/Redis/" class="label label-default mb">Redis</a>
-     
-     
-   </div>
-   
-</article>
-
-
-</div>
-
-      </div>
-    </div>
-  </article>
-   
-</main>
-
-  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
-	
-	
-    <ul class="social-links">
-    	
-        <li><a href="https://github.com/hqd8080" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
-        
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
-        
-    </ul>
-
-    <div class="copyright">
-    	
-        <div class="publishby">
-            <a href="https://github.com/hqd8080" target="_blank"> hqd8080 </a>All Rights Reserved 😀 <a href="/" target="_blank"></a>
-        </div>
-    </div>
-</footer>
-  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
-<script>
-window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
-</script>
-
-<script src="/js/plugin.min.js"></script>
-
-
-<script src="/js/application.js"></script>
-
-
-    <script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: '文章',
-            PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
-            UNTITLED: '(未命名)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-
-<script src="/js/insight.js"></script>
-
-
-
-
-
-
-
-
-  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
-  <script>
-  //利用 FancyBox 实现点击图片放大
-  $(document).ready(function() {
-    $('article img').not('[hidden]').not('.panel-body img').each(function() {
-      var $image = $(this);
-      var imageCaption = $image.attr('alt');
-      var $imageWrapLink = $image.parent('a');
-      if ($imageWrapLink.length < 1) {
-        var src = this.getAttribute('src');
-        var idx = src.lastIndexOf('?');
-        if (idx != -1) {
-          src = src.substring(0, idx);
-        }
-        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
-      }
-      $imageWrapLink.attr('data-fancybox', 'images');
-      if (imageCaption) {
-        $imageWrapLink.attr('data-caption', imageCaption);
-      }
-    });
-    $().fancybox({
-      selector: '[data-fancybox="images"]',
-      hash: false,
-      loop: false,
-    });
-  });
-  </script>
-
-
-
-
-
-</body>
-</html>"panel-footer">
-     
-      <a href="/tags/redis/" class="label label-default mb">redis</a>
-     
-     
-   </div>
-   
-</article>
-
-
-</div>
-
-<div class="col-md-6">
-    
-<article class="panel panel-default hover-shadow hover-grow" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="panel-body">
-     <div class="article-meta">
-       <time datetime="2020-05-22T10:50:20.000Z" itemprop="datePublished">2020-05-22</time>
-     </div>
-     <h3 class="article-title" itemprop="name">
-       <a class="article-link" href="/2020/05/22/redis/redis-hash/">Redis（三）哈希类型（hash）的使用</a>
-     </h3>
-   </div>
-   
-   <div class="panel-footer">
-     
-      <a href="/tags/redis/" class="label label-default mb">redis</a>
-     
-     
-   </div>
-   
-</article>
-
-
-</div>
-
-<div class="col-md-6">
-    
-<article class="panel panel-default hover-shadow hover-grow" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="panel-body">
-     <div class="article-meta">
-       <time datetime="2020-05-22T10:40:10.000Z" itemprop="datePublished">2020-05-22</time>
-     </div>
-     <h3 class="article-title" itemprop="name">
-       <a class="article-link" href="/2020/05/22/redis/redis-list/">Redis（二）列表类型（list）的使用</a>
-     </h3>
-   </div>
-   
-   <div class="panel-footer">
-     
-      <a href="/tags/redis/" class="label label-default mb">redis</a>
-     
-     
-   </div>
-   
-</article>
-
-
-</div>
-
-<div class="col-md-6">
-    
-<article class="panel panel-default hover-shadow hover-grow" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="panel-body">
-     <div class="article-meta">
-       <time datetime="2020-05-22T10:30:28.000Z" itemprop="datePublished">2020-05-22</time>
-     </div>
-     <h3 class="article-title" itemprop="name">
-       <a class="article-link" href="/2020/05/22/redis/redis-string/">Redis（一）字符串类型（string）的使用</a>
-     </h3>
-   </div>
-   
-   <div class="panel-footer">
-     
-      <a href="/tags/redis/" class="label label-default mb">redis</a>
      
      
    </div>
