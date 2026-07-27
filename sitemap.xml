@@ -809,20 +809,6 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/tags/Git/</loc>
-    <lastmod>2026-07-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/tags/MySQL/</loc>
-    <lastmod>2026-07-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hqd8080.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>daily</changefreq>
@@ -858,6 +844,13 @@
   </url>
   
   <url>
+    <loc>https://hqd8080.github.io/tags/Git/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hqd8080.github.io/tags/docker/</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>daily</changefreq>
@@ -886,7 +879,7 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/tags/gRPC/</loc>
+    <loc>https://hqd8080.github.io/tags/MySQL/</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -915,6 +908,13 @@
   
   <url>
     <loc>https://hqd8080.github.io/tags/kafka/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/tags/gRPC/</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1000,21 +1000,14 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/categories/Git/</loc>
-    <lastmod>2026-07-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/categories/MySQL/</loc>
-    <lastmod>2026-07-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hqd8080.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/categories/Git/</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1035,7 +1028,7 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/categories/gRPC/</loc>
+    <loc>https://hqd8080.github.io/categories/MySQL/</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1050,6 +1043,13 @@
   
   <url>
     <loc>https://hqd8080.github.io/categories/Kafka/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/categories/gRPC/</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1084,14 +1084,14 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/categories/Redis/</loc>
+    <loc>https://hqd8080.github.io/categories/Java/</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/categories/Java/</loc>
+    <loc>https://hqd8080.github.io/categories/Redis/</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
