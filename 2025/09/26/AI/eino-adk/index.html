@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>使用 Eino ADK 调用 DeepSeek 大模型 | @@</title>
+  <meta name="description" content="121、Eino ADK Agent 工具调用2、大模型流式输出  安装框架依赖Eino 框架 0.5.0 版本才正式支持 ADK 功能、所以先要升级为最新的框架版本 1go get -v -u github.com&#x2F;cloudwego&#x2F;eino@latest  Eino ADK 介绍Eino ADK(Agent Development Kit) 参考 Google-ADK 设计的智能体开发套件；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Eino ADK 调用 DeepSeek 大模型">
+<meta property="og:url" content="https://hqd8080.github.io/2025/09/26/AI/eino-adk/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="121、Eino ADK Agent 工具调用2、大模型流式输出  安装框架依赖Eino 框架 0.5.0 版本才正式支持 ADK 功能、所以先要升级为最新的框架版本 1go get -v -u github.com&#x2F;cloudwego&#x2F;eino@latest  Eino ADK 介绍Eino ADK(Agent Development Kit) 参考 Google-ADK 设计的智能体开发套件；">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-26T01:11:11.000Z">
+<meta property="article:modified_time" content="2026-07-28T14:59:51.776Z">
+<meta property="article:author" content="hqd8080">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Golang">
+<meta property="article:tag" content="Eino">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://hqd8080.github.io/2025/09/26/AI/eino-adk/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="/">
+          <img class="img-circle" src="/images/avatar.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">🌴🌴🧩🧩🥥</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Gopher</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shanghai, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hqd8080" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <!--<div class="widget">-->
+<!--    <h3 class="widget-title">公告</h3>-->
+<!--    <div class="widget-body">-->
+<!--        <div id="board">-->
+<!--            <div class="content">-->
+<!--                -->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Go%E8%AF%AD%E8%A8%80/">Go语言</a><span class="category-list-count">39</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kafka/">Kafka</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kubernetes/">Kubernetes</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gRPC/">gRPC</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/goZero/">goZero</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      <!---->
+<!--  <div class="widget">-->
+<!--    <h3 class="widget-title">标签</h3>-->
+<!--    <div class="widget-body">-->
+<!--      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/" rel="tag">Blockchain</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eino/" rel="tag">Eino</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/" rel="tag">Ethereum</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go/" rel="tag">Go</a><span class="tag-list-count">47</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">51</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Solidity/" rel="tag">Solidity</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSocket/" rel="tag">WebSocket</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/" rel="tag">gRPC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go-zero/" rel="tag">go-zero</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gorm/" rel="tag">gorm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grafana/" rel="tag">grafana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hardhat/" rel="tag">hardhat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/" rel="tag">kafka</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/" rel="tag">kubernetes</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/" rel="tag">microservice</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prometheus/" rel="tag">prometheus</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a><span class="tag-list-count">3</span></li></ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!---->
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AI/" style="font-size: 13.2px;">AI</a> <a href="/tags/Blockchain/" style="font-size: 13.6px;">Blockchain</a> <a href="/tags/Eino/" style="font-size: 13.2px;">Eino</a> <a href="/tags/Ethereum/" style="font-size: 13.5px;">Ethereum</a> <a href="/tags/Git/" style="font-size: 13.2px;">Git</a> <a href="/tags/Go/" style="font-size: 13.9px;">Go</a> <a href="/tags/Golang/" style="font-size: 14px;">Golang</a> <a href="/tags/Java/" style="font-size: 13.3px;">Java</a> <a href="/tags/MySQL/" style="font-size: 13.1px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Redis/" style="font-size: 13px;">Redis</a> <a href="/tags/Solidity/" style="font-size: 13.6px;">Solidity</a> <a href="/tags/SpringBoot/" style="font-size: 13.3px;">SpringBoot</a> <a href="/tags/WebSocket/" style="font-size: 13.1px;">WebSocket</a> <a href="/tags/docker/" style="font-size: 13.8px;">docker</a> <a href="/tags/gRPC/" style="font-size: 13.1px;">gRPC</a> <a href="/tags/go-zero/" style="font-size: 13.3px;">go-zero</a> <a href="/tags/gorm/" style="font-size: 13px;">gorm</a> <a href="/tags/grafana/" style="font-size: 13px;">grafana</a> <a href="/tags/hardhat/" style="font-size: 13px;">hardhat</a> <a href="/tags/k8s/" style="font-size: 13.7px;">k8s</a> <a href="/tags/kafka/" style="font-size: 13.3px;">kafka</a> <a href="/tags/kubernetes/" style="font-size: 13.7px;">kubernetes</a> <a href="/tags/linux/" style="font-size: 13.4px;">linux</a> <a href="/tags/microservice/" style="font-size: 13.2px;">microservice</a> <a href="/tags/prometheus/" style="font-size: 13px;">prometheus</a> <a href="/tags/redis/" style="font-size: 13.6px;">redis</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 13.6px;">区块链</a> <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 13.2px;">微服务</a>
+    </div>
+  </div>
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-AI/eino-adk" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用 Eino ADK 调用 DeepSeek 大模型
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2025/09/26/AI/eino-adk/" class="article-date">
+	  <time datetime="2025-09-26T01:11:11.000Z" itemprop="datePublished">2025-09-26</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/AI/">AI</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/AI/" rel="tag">AI</a>, <a class="article-tag-link-link" href="/tags/Eino/" rel="tag">Eino</a>, <a class="article-tag-link-link" href="/tags/Golang/" rel="tag">Golang</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2025/09/26/AI/eino-adk/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.2k(字)</span>
+	
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、Eino ADK Agent 工具调用</span><br><span class="line">2、大模型流式输出</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装框架依赖"><a href="#安装框架依赖" class="headerlink" title="安装框架依赖"></a>安装框架依赖</h4><p>Eino 框架 0.5.0 版本才正式支持 ADK 功能、所以先要升级为最新的框架版本</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get -v -u github.com/cloudwego/eino@latest</span><br></pre></td></tr></table></figure>
+
+<h4 id="Eino-ADK-介绍"><a href="#Eino-ADK-介绍" class="headerlink" title="Eino ADK 介绍"></a>Eino ADK 介绍</h4><p>Eino ADK(Agent Development Kit) 参考 Google-ADK 设计的智能体开发套件；<br>提供了 Go 语言 Agent 开发灵活的组合框架、支持 Agent、Multi-Agent 功能，并为多个Agent交互场景沉淀了通用的上下文传递、事件流分发和转换、任务控制权转让、中断与恢复、通用切片等能力；</p>
+<h4 id="Eino-ADK的核心特点"><a href="#Eino-ADK的核心特点" class="headerlink" title="Eino ADK的核心特点"></a>Eino ADK的核心特点</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1、灵活的Agent抽象：支持 ChatModel Agent、Workflow Agent 等多种 Agent 类型；</span><br><span class="line">2、多Agent协作：支持 Sequential、Loop、Parallel 等多种工作流模式；</span><br><span class="line">3、任务控制权转让：Agent之间可以动态转让任务；</span><br><span class="line">4、中断与恢复：支持 CheckPoint 机制、实现任务中断与恢复；</span><br><span class="line">5、时间流处理：提供异步的事件流处理，支持流式输出；</span><br><span class="line">6、通用切片能力：支持 Callback、监控等切面功能；</span><br></pre></td></tr></table></figure>
+
+<h4 id="Eino-ADK的应用场景"><a href="#Eino-ADK的应用场景" class="headerlink" title="Eino ADK的应用场景"></a>Eino ADK的应用场景</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、只能助手和客服系统：客服系统和智能助手；</span><br><span class="line">2、工作流系统：可以实现多步骤、多Agent协作的复杂任务；</span><br><span class="line">3、任务规划和执行：Plan-Execute-Replan 模式的任务处理；</span><br><span class="line">4、多Agent系统：Supervisor Agent 管理多个子Agent；</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Eino-ADK支持的Agent类型"><a href="#Eino-ADK支持的Agent类型" class="headerlink" title="Eino ADK支持的Agent类型"></a>Eino ADK支持的Agent类型</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、ChatModelAgent：基于 ChatModel 的 Agent，支持工具调用；</span><br><span class="line">2、SequentialAgent：顺序执行多个子Agent；</span><br><span class="line">3、LoopAgent：循环执行多个子Agent、支持迭代优化；</span><br><span class="line">4、Plan-Execute Agent：并行执行多个子Agent；</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用-Eino-ADK-调用大模型实例"><a href="#使用-Eino-ADK-调用大模型实例" class="headerlink" title="使用 Eino ADK 调用大模型实例"></a>使用 Eino ADK 调用大模型实例</h4><h5 id="安装框架组件依赖"><a href="#安装框架组件依赖" class="headerlink" title="安装框架组件依赖"></a>安装框架组件依赖</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get github.com/cloudwego/eino-ext/components/model/deepseek</span><br><span class="line"><span class="keyword">go</span> get github.com/cloudwego/eino/adk</span><br><span class="line"><span class="keyword">go</span> get github.com/cloudwego/eino/components/tool</span><br><span class="line"><span class="keyword">go</span> get github.com/cloudwego/eino/components/tool/utils</span><br><span class="line"><span class="keyword">go</span> get github.com/cloudwego/eino/compose</span><br><span class="line"><span class="keyword">go</span> get github.com/cloudwego/eino/schema</span><br><span class="line"><span class="keyword">go</span> get github.com/joho/godotenv</span><br></pre></td></tr></table></figure>
+
+<h5 id="Eino-ADK-调用-DeepSeek-配置"><a href="#Eino-ADK-调用-DeepSeek-配置" class="headerlink" title="Eino ADK 调用 DeepSeek 配置"></a>Eino ADK 调用 DeepSeek 配置</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># .env</span><br><span class="line">DEEPSEEK_API_KEY=sk-d840add2ae604c33ad350781f24fddf0</span><br><span class="line">DEEPSEEK_BASE_URL=https://api.deepseek.com</span><br><span class="line">DEEPSEEK_MODEL=deepseek-v4-pro</span><br></pre></td></tr></table></figure>
+
+<h5 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @package    : main</span></span><br><span class="line"><span class="comment">// @file       : main.go</span></span><br><span class="line"><span class="comment">// @author     : hqd8080</span></span><br><span class="line"><span class="comment">// @contact    : hanquanding@163.com</span></span><br><span class="line"><span class="comment">// @time       : 2025/9/26</span></span><br><span class="line"><span class="comment">// @description: main</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;context&quot;</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;io&quot;</span></span><br><span class="line">    <span class="string">&quot;log&quot;</span></span><br><span class="line">    <span class="string">&quot;os&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="string">&quot;github.com/cloudwego/eino-ext/components/model/deepseek&quot;</span></span><br><span class="line">    <span class="string">&quot;github.com/cloudwego/eino/adk&quot;</span></span><br><span class="line">    <span class="string">&quot;github.com/cloudwego/eino/components/tool&quot;</span></span><br><span class="line">    <span class="string">&quot;github.com/cloudwego/eino/components/tool/utils&quot;</span></span><br><span class="line">    <span class="string">&quot;github.com/cloudwego/eino/compose&quot;</span></span><br><span class="line">    <span class="string">&quot;github.com/cloudwego/eino/schema&quot;</span></span><br><span class="line">    <span class="string">&quot;github.com/joho/godotenv&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 加载环境变量</span></span><br><span class="line">    <span class="keyword">if</span> err := godotenv.Load(<span class="string">&quot;.env&quot;</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ctx, cancel := context.WithCancel(context.Background())</span><br><span class="line">    <span class="keyword">defer</span> cancel()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化模型、工具、Agent 和 Runner</span></span><br><span class="line">    chatModel, err := deepseek.NewChatModel(ctx, &amp;deepseek.ChatModelConfig&#123;</span><br><span class="line">        APIKey:  os.Getenv(<span class="string">&quot;DEEPSEEK_API_KEY&quot;</span>),</span><br><span class="line">        BaseURL: os.Getenv(<span class="string">&quot;DEEPSEEK_BASE_URL&quot;</span>),</span><br><span class="line">        Model:   os.Getenv(<span class="string">&quot;DEEPSEEK_MODEL&quot;</span>),</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatalf(<span class="string">&quot;newChatModel err: %v&quot;</span>, err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    timeTool := utils.NewTool(</span><br><span class="line">        &amp;schema.ToolInfo&#123;</span><br><span class="line">            Name:        <span class="string">&quot;get_current_time&quot;</span>,</span><br><span class="line">            Desc:        <span class="string">&quot;获取服务器当前时间&quot;</span>,</span><br><span class="line">            ParamsOneOf: schema.NewParamsOneOfByParams(<span class="keyword">map</span>[<span class="keyword">string</span>]*schema.ParameterInfo&#123;&#125;),</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="function"><span class="keyword">func</span><span class="params">(ctx context.Context, params <span class="keyword">map</span>[<span class="keyword">string</span>]any)</span> <span class="params">(<span class="keyword">string</span>, error)</span></span> &#123;</span><br><span class="line">            <span class="keyword">return</span> time.Now().Format(time.DateTime), <span class="literal">nil</span></span><br><span class="line">        &#125;,</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    agent, err := adk.NewChatModelAgent(ctx, &amp;adk.ChatModelAgentConfig&#123;</span><br><span class="line">        Name:        <span class="string">&quot;hqd8080&quot;</span>,</span><br><span class="line">        Description: <span class="string">&quot;你是一位友好的 AI 助手&quot;</span>,</span><br><span class="line">        Instruction: <span class="string">&quot;你是一位人工智能助手，请用简洁明了的方式回答问题&quot;</span>,</span><br><span class="line">        Model:       chatModel,</span><br><span class="line">        ToolsConfig: adk.ToolsConfig&#123;</span><br><span class="line">            ToolsNodeConfig: compose.ToolsNodeConfig&#123;</span><br><span class="line">                Tools: []tool.BaseTool&#123;timeTool&#125;,</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">        MaxIterations: <span class="number">10</span>, <span class="comment">// 最多执行 10 次工具函数调用</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatalf(<span class="string">&quot;newChatModelAgent err:%v&quot;</span>, err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    runner := adk.NewRunner(ctx, adk.RunnerConfig&#123;</span><br><span class="line">        Agent:           agent,</span><br><span class="line">        EnableStreaming: <span class="literal">true</span>, <span class="comment">// 流式输出</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    query := <span class="string">&quot;你好，请介绍一下 deepseek!、现在几点了？&quot;</span></span><br><span class="line">    </span><br><span class="line">    contentCh := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line">    errCh := <span class="built_in">make</span>(<span class="keyword">chan</span> error)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动一个 goroutine 执行查询与流处理</span></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// 确保 goroutine 退出时关闭所有 channel 通知主 goroutine 结束</span></span><br><span class="line">        <span class="keyword">defer</span> <span class="built_in">close</span>(contentCh)</span><br><span class="line">        <span class="keyword">defer</span> <span class="built_in">close</span>(errCh)</span><br><span class="line">    </span><br><span class="line">        iter := runner.Query(ctx, query)</span><br><span class="line">        <span class="keyword">for</span> &#123;</span><br><span class="line">            event, ok := iter.Next()</span><br><span class="line">            <span class="keyword">if</span> !ok &#123;</span><br><span class="line">                <span class="keyword">break</span> <span class="comment">// 所有事件已处理完毕</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> event.Err != <span class="literal">nil</span> &#123;</span><br><span class="line">                <span class="comment">// 发生错误时通过 errCh 传递，并终止 goroutine</span></span><br><span class="line">                errCh &lt;- event.Err</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line">        </span><br><span class="line">            <span class="comment">// 处理流式输出</span></span><br><span class="line">            <span class="keyword">if</span> event.Output != <span class="literal">nil</span> &amp;&amp; event.Output.MessageOutput != <span class="literal">nil</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> event.Output.MessageOutput.IsStreaming &#123;</span><br><span class="line">                    stream := event.Output.MessageOutput.MessageStream</span><br><span class="line">                    <span class="keyword">for</span> &#123;</span><br><span class="line">                        msg, err := stream.Recv()</span><br><span class="line">                        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                            <span class="keyword">if</span> err == io.EOF &#123;</span><br><span class="line">                                <span class="keyword">break</span> <span class="comment">// 当前流结束</span></span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="comment">// 流读取错误也通过 errCh 传递</span></span><br><span class="line">                            errCh &lt;- fmt.Errorf(<span class="string">&quot;failed to recv message: %w&quot;</span>, err)</span><br><span class="line">                            <span class="keyword">return</span></span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">if</span> msg != <span class="literal">nil</span> &amp;&amp; msg.Content != <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">                            <span class="comment">// 将内容片段发送到 contentCh</span></span><br><span class="line">                            contentCh &lt;- msg.Content</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 主 goroutine 负责消费 channel 并输出结果</span></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> content, ok := &lt;-contentCh:</span><br><span class="line">            <span class="keyword">if</span> !ok &#123;</span><br><span class="line">                <span class="comment">// contentCh 已关闭，检查是否有未处理的错误</span></span><br><span class="line">                err, ok := &lt;-errCh</span><br><span class="line">                <span class="keyword">if</span> ok &amp;&amp; err != <span class="literal">nil</span> &#123;</span><br><span class="line">                    log.Fatalf(<span class="string">&quot;query err: %v&quot;</span>, err)</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="comment">// 正常结束</span></span><br><span class="line">            &#125;</span><br><span class="line">            fmt.Print(content)</span><br><span class="line">        <span class="keyword">case</span> err, ok := &lt;-errCh:</span><br><span class="line">            <span class="keyword">if</span> ok &amp;&amp; err != <span class="literal">nil</span> &#123;</span><br><span class="line">                <span class="comment">// 收到错误立即终止</span></span><br><span class="line">                log.Fatalf(<span class="string">&quot;query err: %v&quot;</span>, err)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-footer">
+      <!--<blockquote class="mt-2x">-->
+<!--  <ul class="post-copyright list-unstyled">-->
+<!--    -->
+<!--    <li class="post-copyright-link hidden-xs">-->
+<!--      <strong>本文链接：</strong>-->
+<!--      <a href="https://hqd8080.github.io/2025/09/26/AI/eino-adk/" title="使用 Eino ADK 调用 DeepSeek 大模型" target="_blank" rel="external">https://hqd8080.github.io/2025/09/26/AI/eino-adk/</a>-->
+<!--    </li>-->
+<!--    -->
+<!--    <li class="post-copyright-license">-->
+<!--      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！-->
+<!--    </li>-->
+<!--  </ul>-->
+<!--</blockquote>-->
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/hqd8080" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/hqd8080" target="_blank"><span class="text-dark">🌴🌴🧩🧩🥥</span><small class="ml-1x">Gopher</small></a></h3>
+        <div>心外无物，知行合一</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2025/09/25/AI/eino-ark/" title="使用 Eino 框架调用 Ark 大模型"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hqd8080" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+            <a href="https://github.com/hqd8080" target="_blank"> hqd8080 </a>All Rights Reserved 😀 <a href="/" target="_blank"></a>
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+</body>
+</html>
