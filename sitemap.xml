@@ -4,21 +4,21 @@
   <url>
     <loc>https://hqd8080.github.io/2025/09/26/AI/eino-adk/</loc>
     
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-08-23</lastmod>
     
   </url>
   
   <url>
     <loc>https://hqd8080.github.io/2025/09/25/AI/eino-ark/</loc>
     
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-08-23</lastmod>
     
   </url>
   
   <url>
     <loc>https://hqd8080.github.io/2025/09/25/AI/eino-deepseek/</loc>
     
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-08-23</lastmod>
     
   </url>
   
@@ -802,7 +802,28 @@
 
   
   <url>
-    <loc>https://hqd8080.github.io/tags/MySQL/</loc>
+    <loc>https://hqd8080.github.io/tags/AI/</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/tags/Golang/</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/tags/Eino/</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/tags/Go/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -844,21 +865,7 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/tags/AI/</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/tags/Golang/</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/tags/Eino/</loc>
+    <loc>https://hqd8080.github.io/tags/MySQL/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -866,6 +873,13 @@
   
   <url>
     <loc>https://hqd8080.github.io/tags/Git/</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/tags/go-zero/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -886,7 +900,7 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/tags/Go/</loc>
+    <loc>https://hqd8080.github.io/tags/gRPC/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -914,20 +928,6 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/tags/go-zero/</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/tags/gRPC/</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hqd8080.github.io/tags/kafka/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>daily</changefreq>
@@ -935,42 +935,7 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/tags/microservice/</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/tags/Nginx/</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hqd8080.github.io/tags/linux/</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/tags/Java/</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/tags/SpringBoot/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1004,10 +969,45 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://hqd8080.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/tags/microservice/</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/tags/Nginx/</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/tags/Java/</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/tags/SpringBoot/</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
-    <loc>https://hqd8080.github.io/categories/MySQL/</loc>
+    <loc>https://hqd8080.github.io/categories/AI/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1021,7 +1021,7 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/categories/AI/</loc>
+    <loc>https://hqd8080.github.io/categories/MySQL/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1035,21 +1035,14 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/categories/Docker/</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/categories/Go%E8%AF%AD%E8%A8%80/</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hqd8080.github.io/categories/goZero/</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/categories/Docker/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1063,7 +1056,28 @@
   </url>
   
   <url>
+    <loc>https://hqd8080.github.io/categories/Go%E8%AF%AD%E8%A8%80/</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hqd8080.github.io/categories/Kafka/</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/categories/Linux/</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hqd8080.github.io/categories/Kubernetes/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1084,13 +1098,6 @@
   </url>
   
   <url>
-    <loc>https://hqd8080.github.io/categories/Linux/</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hqd8080.github.io/categories/Java/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>daily</changefreq>
@@ -1099,13 +1106,6 @@
   
   <url>
     <loc>https://hqd8080.github.io/categories/Redis/</loc>
-    <lastmod>2026-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hqd8080.github.io/categories/Kubernetes/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
